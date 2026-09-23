@@ -15,4 +15,7 @@ dependencies = [
     "nbconvert>=6.5.0",
     "xgboost>=3.4.1",
     "lightgbm>=4.7.0",
+    "fastapi>=0.141.1",
+    "uvicorn[standard]>=0.53.0",
+    "python-multipart>=0.0.32",
 ]

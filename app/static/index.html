@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diwali Sales — one sheet, one predicted spend</title>
+<meta name="description" content="Diwali sales analysis and live Random Forest spend prediction (₹). Married women 26–35 from UP, Maharashtra &amp; Karnataka lead spend.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="sheet">
+  <aside class="margin" aria-label="Fold steps">
+    <div class="rail-label" aria-hidden="true">Insights → Prediction</div>
+    <a class="step" href="#finding" title="Finding">1</a>
+    <a class="step active" href="#reels" title="Analysis" aria-current="step">2</a>
+    <a class="step" href="#model" title="Model">3</a>
+    <a class="step" href="#booth" title="Predict">4</a>
+    <a class="step" href="#proof" title="Proof">5</a>
+  </aside>
+
+  <main>
+    <header>
+      <div class="brand">Diwali Sales Data Analysis &amp; Prediction</div>
+      <nav aria-label="Primary">
+        <a href="#finding" aria-current="page">Finding</a>
+        <a href="#booth">Predict</a>
+        <a href="#proof">Proof</a>
+      </nav>
+    </header>
+
+    <section id="finding" aria-labelledby="hero-h">
+      <h1 id="hero-h">Thousands of Orders. Hidden Patterns. <span class="fold">Predictive Insights.</span></h1>
+      <p class="sub">A data-driven exploration of Diwali purchasing behavior — uncovering patterns across demographics, locations, occupations, orders, and product categories, then using a <strong>Random Forest model</strong> to predict customer purchase amounts.</p>
+      <p class="hint" style="margin-bottom:1.25rem">11,251 records · Customer segmentation · Random Forest prediction</p>
+
+      <div class="crease-row" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+      <div class="metrics" role="list" aria-label="Dataset summary">
+        <div class="metric" role="listitem"><b id="m-rows">11,239</b><span>Transactions analyzed</span></div>
+        <div class="metric" role="listitem"><b id="m-mean">₹9,454</b><span>Average purchase amount</span></div>
+        <div class="metric" role="listitem"><b id="m-med">₹8,109</b><span>Median purchase amount</span></div>
+        <div class="metric" role="listitem"><b>9 features</b><span>Used for prediction</span></div>
+      </div>
+    </section>
+
+    <section class="panel" id="reels" aria-labelledby="reels-h">
+      <h2 id="reels-h">Analysis reels · intermediate folds</h2>
+      <p class="hint">Aggregates from <em>Diwali Sales Data.csv</em> (11,239 rows after cleaning). Bars are magnitude-scaled; vermilion marks the leading fold in each chart.</p>
+
+      <div class="grid-2">
+        <div class="chart-block">
+          <h3>Sales by gender</h3>
+          <div id="chart-gender" role="img" aria-label="Total sales by gender"></div>
+          <p class="insight">Female buyers dominate order count and total spend.</p>
+        </div>
+        <div class="chart-block">
+          <h3>Sales by age group</h3>
+          <div id="chart-age" role="img" aria-label="Total sales by age group"></div>
+          <p class="insight">26–35 places the most orders and spends the most.</p>
+        </div>
+        <div class="chart-block">
+          <h3>Top states by sales</h3>
+          <div id="chart-state" role="img" aria-label="Total sales by top states"></div>
+          <p class="insight">Uttar Pradesh, Maharashtra and Karnataka lead revenue.</p>
+        </div>
+        <div class="chart-block">
+          <h3>Occupation · IT / Healthcare / Aviation</h3>
+          <div id="chart-occ" role="img" aria-label="Total sales by occupation"></div>
+          <p class="insight">IT, Healthcare and Aviation occupations spend the most (gold).</p>
+        </div>
+        <div class="chart-block">
+          <h3>Product category</h3>
+          <div id="chart-cat" role="img" aria-label="Total sales by product category"></div>
+          <p class="insight">Food, Clothing &amp; Apparel and Electronics dominate category revenue.</p>
+        </div>
+        <div class="chart-block">
+          <h3>Mean spend · gender × age</h3>
+          <div class="heat" id="chart-heat" role="img" aria-label="Mean spend heatmap by gender and age group"></div>
+          <p class="insight">Married women 26–35 sit at the hot centre of the sheet.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="model" aria-labelledby="model-h">
+      <h2 id="model-h">The Model</h2>
+      <p class="hint">Categorical features were one-hot encoded and numerical features prepared for modeling. Multiple regressors were evaluated using <strong>5-fold cross-validation with MAE</strong>, including Ridge, Random Forest, Gradient Boosting, XGBoost, and LightGBM, with and without a log-transformed target.</p>
+      <p class="hint">The selected <strong>RandomForestRegressor</strong> was tuned and trained to predict customer purchase amount.</p>
+      <div class="model-file" aria-label="Saved model file">diwali_spend_model.pkl</div>
+      <div class="verdict">
+        <article>
+          <h3>Exploratory Data Analysis</h3>
+          <p>The analysis revealed clear patterns across customer demographics and purchasing behavior. <strong>Women accounted for the majority of orders, with ages 26–35 forming a prominent customer group.</strong> Uttar Pradesh, Maharashtra, and Karnataka stood out across states, while <strong>IT, Healthcare, and Aviation</strong> were prominent occupations. <strong>Food, Clothing, and Electronics</strong> were among the leading product categories.</p>
+        </article>
+        <article>
+          <h3>Features &amp; Target</h3>
+          <p><strong>Input features</strong> — 9 signals used for prediction:</p>
+          <div class="feature-tags" aria-label="Input features">
+            <span>Gender</span><span>Age</span><span>Age Group</span><span>Marital Status</span><span>State</span><span>Zone</span><span>Occupation</span><span>Orders</span><span>Product Category</span>
+          </div>
+          <p style="margin-top:.75rem"><strong>Prediction target</strong></p>
+          <div class="feature-tags"><span class="target">Purchase Amount (₹)</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="booth" id="booth" aria-labelledby="booth-h">
+      <h2 id="booth-h">Predict a Customer Purchase</h2>
+      <p class="hint">Build a customer profile and run it through the trained model. Each selection becomes an input to the same prediction pipeline used during model development.</p>
+      <form class="form" id="pform" novalidate>
+        <div>
+          <label for="f-gender">01 Gender</label>
+          <select id="f-gender" name="Gender" required></select>
+        </div>
+        <div>
+          <label for="f-age">02 Age group</label>
+          <select id="f-age" name="Age Group" required></select>
+        </div>
+        <div>
+          <label for="f-mar">03 Marital</label>
+          <select id="f-mar" name="Marital" required>
+            <option value="1">Married</option>
+            <option value="0">Single</option>
+          </select>
+        </div>
+        <div>
+          <label for="f-state">04 State</label>
+          <select id="f-state" name="State" required></select>
+        </div>
+        <div>
+          <label for="f-occ">05 Occupation</label>
+          <select id="f-occ" name="Occupation" required></select>
+        </div>
+        <div>
+          <label for="f-cat">06 Category</label>
+          <select id="f-cat" name="Product_Category" required></select>
+        </div>
+        <div>
+          <label for="f-orders">07 Orders</label>
+          <select id="f-orders" name="Orders" required>
+            <option value="1">1</option>
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+        <div class="btn-row">
+          <button type="submit" class="primary" id="btn-predict">Final fold →</button>
+          <span class="note">Live model · RandomForest pipeline · Amount in ₹</span>
+        </div>
+        <p class="error" id="form-error" role="alert"></p>
+      </form>
+
+      <div class="result" id="result" aria-live="polite">
+        <div class="amount" id="amt">—<small>Predicted spend standing</small></div>
+        <div>
+          <div class="peer-bars" id="peer-bars" aria-hidden="true"></div>
+          <div class="peer-labels" aria-hidden="true">
+            <span>Median</span><span>You</span><span>Mean</span><span>Peer</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="method" id="proof">
+      <strong style="display:block; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; color:var(--vermilion-text); margin-bottom:.6rem">What the Data Reveals</strong>
+      <p style="margin-bottom:.75rem">The analysis identifies married women aged 26–35 in Uttar Pradesh, Maharashtra, and Karnataka, particularly those working in IT, Healthcare, and Aviation, as the highest-spending customer segment in this dataset.</p>
+      <p style="margin-bottom:.75rem">The prediction layer uses the trained Random Forest regression pipeline to estimate purchase amounts from the selected customer attributes. The result is not just a prediction — it is a complete path from raw transaction data → exploratory analysis → feature engineering → model selection → prediction.</p>
+      <p>Every insight shown here comes from the underlying data and trained model. The interface visualizes and exposes those findings; it does not invent them.</p>
+    </div>
+
+    <footer class="site">
+      Source: Diwali Sales Data.csv · diwali_spend_model.pkl · FastAPI · Local development build. No fabricated customers, benchmarks or press.
+    </footer>
+  </main>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

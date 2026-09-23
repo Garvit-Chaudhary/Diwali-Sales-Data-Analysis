@@ -1,0 +1,202 @@
+{
+ "rows": 11239,
+ "mean": 9454,
+ "median": 8109,
+ "max": 23952,
+ "min": 188,
+ "avg_orders": 2.49,
+ "gender_sales": {
+  "F": 74335856,
+  "M": 31913276
+ },
+ "gender_orders": {
+  "F": 19548,
+  "M": 8433
+ },
+ "age_sales": {
+  "0-17": 2699653,
+  "18-25": 17240732,
+  "26-35": 42613443,
+  "36-45": 22144995,
+  "46-50": 9207844,
+  "51-55": 8261477,
+  "55+": 4080987
+ },
+ "age_orders": {
+  "0-17": 690,
+  "18-25": 4650,
+  "26-35": 11395,
+  "36-45": 5687,
+  "46-50": 2371,
+  "51-55": 2112,
+  "55+": 1076
+ },
+ "state_sales": {
+  "Uttar Pradesh": 19374968,
+  "Maharashtra": 14427543,
+  "Karnataka": 13523540,
+  "Delhi": 11603819,
+  "Madhya Pradesh": 8101142,
+  "Andhra Pradesh": 8037146,
+  "Himachal Pradesh": 4963368,
+  "Haryana": 4220175,
+  "Bihar": 4022757,
+  "Gujarat": 3946082
+ },
+ "state_orders": {
+  "Uttar Pradesh": 4807,
+  "Maharashtra": 3810,
+  "Karnataka": 3240,
+  "Delhi": 2740,
+  "Madhya Pradesh": 2252,
+  "Andhra Pradesh": 2051,
+  "Himachal Pradesh": 1568,
+  "Haryana": 1109,
+  "Bihar": 1062,
+  "Gujarat": 1066
+ },
+ "occ_sales": {
+  "IT Sector": 14755079,
+  "Healthcare": 13034587,
+  "Aviation": 12602298,
+  "Banking": 10770610,
+  "Govt": 8517212,
+  "Hospitality": 6376405,
+  "Media": 6295832,
+  "Automobile": 5368596,
+  "Chemical": 5297436,
+  "Lawyer": 4981665,
+  "Retail": 4783170,
+  "Food Processing": 4070670,
+  "Construction": 3597511,
+  "Textile": 3204972,
+  "Agriculture": 2593087
+ },
+ "cat_sales": {
+  "Food": 33933883,
+  "Clothing & Apparel": 16495019,
+  "Electronics & Gadgets": 15643846,
+  "Footwear & Shoes": 15575209,
+  "Furniture": 5440051,
+  "Games & Toys": 4331694,
+  "Sports Products": 3635933,
+  "Beauty": 1959484,
+  "Auto": 1958609,
+  "Stationery": 1676051
+ },
+ "marital_gender": {
+  "0_F": 43786648,
+  "0_M": 18338738,
+  "1_F": 30549207,
+  "1_M": 13574538
+ },
+ "options": {
+  "Gender": [
+   "F",
+   "M"
+  ],
+  "Age Group": [
+   "0-17",
+   "18-25",
+   "26-35",
+   "36-45",
+   "46-50",
+   "51-55",
+   "55+"
+  ],
+  "State": [
+   "Andhra Pradesh",
+   "Bihar",
+   "Delhi",
+   "Gujarat",
+   "Haryana",
+   "Himachal Pradesh",
+   "Jharkhand",
+   "Karnataka",
+   "Kerala",
+   "Madhya Pradesh",
+   "Maharashtra",
+   "Punjab",
+   "Rajasthan",
+   "Telangana",
+   "Uttar Pradesh",
+   "Uttarakhand"
+  ],
+  "Zone": [
+   "Central",
+   "Eastern",
+   "Northern",
+   "Southern",
+   "Western"
+  ],
+  "Occupation": [
+   "Agriculture",
+   "Automobile",
+   "Aviation",
+   "Banking",
+   "Chemical",
+   "Construction",
+   "Food Processing",
+   "Govt",
+   "Healthcare",
+   "Hospitality",
+   "IT Sector",
+   "Lawyer",
+   "Media",
+   "Retail",
+   "Textile"
+  ],
+  "Product_Category": [
+   "Auto",
+   "Beauty",
+   "Books",
+   "Clothing & Apparel",
+   "Decor",
+   "Electronics & Gadgets",
+   "Food",
+   "Footwear & Shoes",
+   "Furniture",
+   "Games & Toys",
+   "Hand & Power Tools",
+   "Household items",
+   "Office",
+   "Pet Care",
+   "Sports Products",
+   "Stationery",
+   "Tupperware",
+   "Veterinary"
+  ]
+ },
+ "heatmap_gender_age": {
+  "F": {
+   "0-17": 8898,
+   "18-25": 9109,
+   "26-35": 9472,
+   "36-45": 9829,
+   "46-50": 9731,
+   "51-55": 9738,
+   "55+": 8842
+  },
+  "M": {
+   "0-17": 9390,
+   "18-25": 9327,
+   "26-35": 9158,
+   "36-45": 9411,
+   "46-50": 8498,
+   "51-55": 10384,
+   "55+": 10813
+  }
+ },
+ "state_mean": {
+  "Uttar Pradesh": 9967,
+  "Maharashtra": 9461,
+  "Karnataka": 10371,
+  "Delhi": 10511,
+  "Madhya Pradesh": 8796,
+  "Andhra Pradesh": 9910,
+  "Himachal Pradesh": 8163,
+  "Haryana": 9337,
+  "Bihar": 9269,
+  "Gujarat": 9241
+ }
+}

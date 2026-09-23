@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Direction demos — Diwali Sales</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; margin: 0; }
+  body { font: 15px/1.5 system-ui, sans-serif; background: #111; color: #eee; min-height: 100vh; padding: 32px; }
+  h1 { font-size: 1.4rem; font-weight: 650; margin-bottom: 8px; }
+  p.lead { color: #aaa; max-width: 52ch; margin-bottom: 28px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  a.card { display: block; background: #1c1c1c; border: 1px solid #333; border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; transition: border-color .15s; }
+  a.card:hover, a.card:focus-visible { border-color: #888; outline: none; }
+  .card .frame { aspect-ratio: 16/10; overflow: hidden; position: relative; background: #000; }
+  .card iframe { width: 160%; height: 160%; border: 0; transform: scale(.625); transform-origin: 0 0; pointer-events: none; }
+  .card .meta { padding: 14px 16px; }
+  .card .meta strong { display: block; font-size: 1rem; margin-bottom: 4px; }
+  .card .meta span { color: #999; font-size: .85rem; }
+  .tag { display: inline-block; font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: #f5a623; margin-bottom: 6px; }
+</style>
+</head>
+<body>
+  <h1>Six bolder directions — pick one</h1>
+  <p class="lead">Full-commitment first-viewports of the Diwali Sales dashboard + spend prediction, one per foreign form from the re-roll. Open any to interact; come back and lock your choice.</p>
+  <div class="grid">
+    <a class="card" href="01-cloud-edge.html"><div class="frame"><iframe src="01-cloud-edge.html" tabindex="-1" title=""></iframe></div><div class="meta"><span class="tag">Leader</span><strong>Iridescent cloud edge</strong><span>Pastel diffraction bands, quiet science field</span></div></a>
+    <a class="card" href="02-origami.html"><div class="frame"><iframe src="02-origami.html" tabindex="-1" title=""></iframe></div><div class="meta"><strong>Vermilion orizuru</strong><span>One red sheet, thirty-two folds, crease grammar</span></div></a>
+    <a class="card" href="03-ascii.html"><div class="frame"><iframe src="03-ascii.html" tabindex="-1" title=""></iframe></div><div class="meta"><strong>ASCII live scene</strong><span>Glyph density as light; data as character field</span></div></a>
+    <a class="card" href="04-phosphor.html"><div class="frame"><iframe src="04-phosphor.html" tabindex="-1" title=""></iframe></div><div class="meta"><strong>Phosphor terminal</strong><span>P1 green on curved glass, transcript predict</span></div></a>
+    <a class="card" href="05-transit.html"><div class="frame"><iframe src="05-transit.html" tabindex="-1" title=""></iframe></div><div class="meta"><strong>Midnight transit mural</strong><span>Enamel lines, interchange blooms, journey = funnel</span></div></a>
+    <a class="card" href="06-lineup.html"><div class="frame"><iframe src="06-lineup.html" tabindex="-1" title=""></iframe></div><div class="meta"><strong>Festival lineup poster</strong><span>One face, eight sizes, billing as hierarchy</span></div></a>
+  </div>
+</body>
+</html>

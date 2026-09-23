@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Midnight transit mural — Diwali Sales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --enamel: #0b1c3a;
+    --enamel-deep: #061228;
+    --porcelain: #f2f0ea;
+    --scarlet: #e23d28;
+    --cobalt: #3b82f6;
+    --amber: #f5a623;
+    --green: #2ecc71;
+    --label: #dce4f0;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: "DM Sans", system-ui, sans-serif;
+    background: var(--enamel);
+    color: var(--porcelain);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+  .mural-edge { height: 6px; background: linear-gradient(90deg, var(--scarlet), var(--cobalt), var(--amber), var(--green), var(--scarlet)); }
+  header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.75rem;
+    background: var(--enamel-deep);
+    border-bottom: 1px solid rgba(242,240,234,.12);
+  }
+  .brand { font-weight: 700; font-size: .95rem; letter-spacing: .06em; }
+  .brand i { font-style: normal; color: var(--amber); }
+  nav a { color: var(--label); text-decoration: none; margin-left: 1.25rem; font-size: .9rem; font-weight: 500; }
+  nav a[aria-current] { color: var(--porcelain); border-bottom: 3px solid var(--scarlet); padding-bottom: 2px; }
+  main { max-width: 1120px; margin: 0 auto; padding: 2rem 1.75rem 3rem; }
+  .route-tag {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: var(--scarlet); color: #fff;
+    font-weight: 700; font-size: .72rem; letter-spacing: .12em;
+    padding: .3rem .65rem; margin-bottom: 1rem;
+  }
+  .route-tag::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: #fff; }
+  h1 { font-size: clamp(1.75rem, 4vw, 2.6rem); font-weight: 700; line-height: 1.15; max-width: 22ch; margin-bottom: .85rem; letter-spacing: -0.02em; }
+  h1 .st { color: var(--amber); }
+  .sub { color: var(--label); max-width: 56ch; margin-bottom: 1.75rem; font-size: 1.02rem; }
+  .network {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    background: rgba(242,240,234,.08);
+    border: 1px solid rgba(242,240,234,.15);
+    margin-bottom: 2rem;
+  }
+  .station {
+    background: var(--enamel-deep);
+    padding: .95rem 1rem;
+    position: relative;
+    border-right: 1px solid rgba(242,240,234,.1);
+  }
+  .station:last-child { border-right: 0; }
+  .station::before {
+    content: "";
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  }
+  .station:nth-child(1)::before { background: var(--scarlet); }
+  .station:nth-child(2)::before { background: var(--cobalt); }
+  .station:nth-child(3)::before { background: var(--amber); }
+  .station:nth-child(4)::before { background: var(--green); }
+  .station b { display: block; font-size: 1.35rem; font-variant-numeric: tabular-nums; }
+  .station span { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--label); opacity: .75; }
+  .diagram {
+    background: var(--enamel-deep);
+    border: 1px solid rgba(242,240,234,.15);
+    padding: 1.25rem 1.25rem 1rem;
+    margin-bottom: 2rem;
+  }
+  .diagram h2 { font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--label); margin-bottom: 1rem; opacity: .7; }
+  .line-row { display: flex; align-items: center; gap: 0; margin-bottom: .85rem; }
+  .line-label { width: 7.5rem; flex-shrink: 0; font-size: .78rem; font-weight: 500; color: var(--label); }
+  .track { flex: 1; height: 4px; position: relative; background: rgba(242,240,234,.12); }
+  .track .fill { position: absolute; left: 0; top: 0; bottom: 0; }
+  .track .stop {
+    position: absolute; top: 50%; width: 12px; height: 12px;
+    background: var(--enamel-deep); border: 3px solid var(--porcelain);
+    border-radius: 50%; transform: translate(-50%, -50%);
+  }
+  .track .stop.major { width: 16px; height: 16px; border-width: 4px; box-shadow: 0 0 0 4px rgba(242,240,234,.15); }
+  .stop-label { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); font-size: .62rem; color: var(--label); white-space: nowrap; opacity: .8; }
+  .booth {
+    background: var(--porcelain);
+    color: var(--enamel);
+    padding: 1.5rem;
+    position: relative;
+  }
+  .booth::before {
+    content: "";
+    position: absolute; top: -8px; left: 32px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--amber); border: 3px solid var(--enamel);
+    box-shadow: 0 0 0 3px var(--porcelain);
+  }
+  .booth h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: .25rem; color: var(--enamel); }
+  .booth .hint { font-size: .85rem; color: #4a5568; margin-bottom: 1.1rem; }
+  .form { display: grid; grid-template-columns: repeat(3, 1fr); gap: .85rem; }
+  label { display: block; font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #64748b; margin-bottom: .3rem; }
+  select {
+    width: 100%; font: inherit; font-size: .95rem;
+    padding: .55rem .6rem;
+    background: #fff; color: var(--enamel);
+    border: 2px solid #cbd5e1;
+    border-radius: 0;
+  }
+  select:focus-visible, button:focus-visible { outline: 3px solid var(--cobalt); outline-offset: 2px; }
+  select[data-picked="1"] { border-color: var(--scarlet); box-shadow: inset 0 0 0 1px var(--scarlet); }
+  .actions { grid-column: 1 / -1; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  button {
+    font: inherit; font-weight: 700; font-size: .95rem;
+    background: var(--scarlet); color: #fff;
+    border: 0; padding: .65rem 1.4rem;
+    cursor: pointer; letter-spacing: .04em;
+  }
+  button:hover { filter: brightness(1.08); }
+  .hint2 { font-size: .78rem; color: #64748b; }
+  .result { margin-top: 1.15rem; padding-top: 1rem; border-top: 2px dashed #cbd5e1; display: none; }
+  .result.show { display: block; }
+  .result .amount { font-size: 2.4rem; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--scarlet); line-height: 1.1; }
+  .result .amount small { display: block; font-size: .75rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: #64748b; margin-top: .25rem; }
+  .compare { display: flex; gap: 4px; margin-top: 1rem; height: 64px; align-items: flex-end; }
+  .cbar { flex: 1; position: relative; border-radius: 0; }
+  .cbar span { position: absolute; top: -1.15rem; left: 0; right: 0; text-align: center; font-size: .65rem; font-weight: 700; color: #64748b; font-variant-numeric: tabular-nums; }
+  .clabels { display: flex; gap: 4px; margin-top: .35rem; }
+  .clabels span { flex: 1; text-align: center; font-size: .62rem; color: #64748b; letter-spacing: .04em; text-transform: uppercase; }
+  footer { margin-top: 2rem; font-size: .72rem; color: var(--label); opacity: .65; border-top: 1px solid rgba(242,240,234,.12); padding-top: .85rem; }
+  @media (max-width: 720px) {
+    .network { grid-template-columns: 1fr 1fr; }
+    .station:nth-child(2) { border-right: 0; }
+    .form { grid-template-columns: 1fr; }
+    .line-label { width: 5.5rem; font-size: .7rem; }
+  }
+</style>
+</head>
+<body>
+<div class="mural-edge" aria-hidden="true"></div>
+<header>
+  <div class="brand">DIWALI <i>LINE</i> · SPEND NETWORK</div>
+  <nav>
+    <a href="#" aria-current="page">Finding</a>
+    <a href="#booth">Predict</a>
+    <a href="#method">Method</a>
+  </nav>
+</header>
+<main>
+  <div class="route-tag">LINE 26–35 · HIGHEST FARE</div>
+  <h1>Ride from demographics to <span class="st">₹ spend</span> — three interchanges carry the traffic.</h1>
+  <p class="sub">UP, Maharashtra and Karnataka are the busy interchanges. IT, Healthcare and Aviation run the express. Married women 26–35 hold the through-ticket — confirmed in EDA and by the model.</p>
+
+  <div class="network" role="list">
+    <div class="station" role="listitem"><b>11,239</b><span>Passengers / orders</span></div>
+    <div class="station" role="listitem"><b>₹9,454</b><span>Mean fare</span></div>
+    <div class="station" role="listitem"><b>₹8,109</b><span>Median</span></div>
+    <div class="station" role="listitem"><b>₹23,952</b><span>Peak trip</span></div>
+  </div>
+
+  <div class="diagram" aria-label="Spend contribution by segment as transit lines">
+    <h2>Contribution diagram · line = segment</h2>
+    <div class="line-row">
+      <div class="line-label" style="color:#ff8f7a">Age 26–35</div>
+      <div class="track"><div class="fill" style="width:92%;background:var(--scarlet)"></div>
+        <div class="stop major" style="left:92%"><span class="stop-label">peak</span></div></div>
+    </div>
+    <div class="line-row">
+      <div class="line-label" style="color:#93c5fd">Top 3 states</div>
+      <div class="track"><div class="fill" style="width:78%;background:var(--cobalt)"></div>
+        <div class="stop major" style="left:78%"><span class="stop-label">UP · MH · KA</span></div></div>
+    </div>
+    <div class="line-row">
+      <div class="line-label" style="color:#fcd34d">IT · Health · Avia</div>
+      <div class="track"><div class="fill" style="width:70%;background:var(--amber)"></div>
+        <div class="stop major" style="left:70%"><span class="stop-label">express</span></div></div>
+    </div>
+    <div class="line-row" style="margin-bottom:1.5rem">
+      <div class="line-label" style="color:#86efac">Food · Cloth · Elec</div>
+      <div class="track"><div class="fill" style="width:85%;background:var(--green)"></div>
+        <div class="stop major" style="left:85%"><span class="stop-label">top goods</span></div></div>
+    </div>
+  </div>
+
+  <section class="booth" id="booth">
+    <h2>Plan a journey · get the fare</h2>
+    <p class="hint">Each choice is a boarding pass. Selected stops burn scarlet.</p>
+    <form class="form" id="pform">
+      <div><label for="g">Gender</label><select id="g" data-picked="1"><option>F</option><option>M</option></select></div>
+      <div><label for="age">Age band</label><select id="age" data-picked="1"><option>26-35</option><option>18-25</option><option>36-45</option><option>46-50</option><option>51-55</option><option>55+</option></select></div>
+      <div><label for="mar">Marital</label><select id="mar" data-picked="1"><option value="1">Married</option><option value="0">Single</option></select></div>
+      <div><label for="st">Origin state</label><select id="st" data-picked="1"><option>Uttar Pradesh</option><option>Maharashtra</option><option>Karnataka</option><option>Delhi</option></select></div>
+      <div><label for="oc">Occupation line</label><select id="oc" data-picked="1"><option>IT Sector</option><option>Healthcare</option><option>Aviation</option><option>Banking</option></select></div>
+      <div><label for="pc">Goods category</label><select id="pc" data-picked="1"><option>Food</option><option>Clothing &amp; Apparel</option><option>Electronics &amp; Gadgets</option></select></div>
+      <div class="actions">
+        <button type="submit">Issue ticket</button>
+        <span class="hint2">Demo fare · live model on FastAPI build</span>
+      </div>
+    </form>
+    <div class="result show" id="res" aria-live="polite">
+      <div class="amount" id="amt">₹11,240<small>Predicted spend · through service</small></div>
+      <div class="compare" aria-hidden="true">
+        <div class="cbar" style="height:40%;background:#94a3b8"><span>8.1k</span></div>
+        <div class="cbar" style="height:76%;background:var(--scarlet)"><span id="barYou">11.2k</span></div>
+        <div class="cbar" style="height:54%;background:var(--cobalt)"><span>9.5k</span></div>
+        <div class="cbar" style="height:36%;background:var(--green)"><span>7.4k</span></div>
+      </div>
+      <div class="clabels"><span>Median</span><span>You</span><span>Mean</span><span>Age peer</span></div>
+    </div>
+  </section>
+
+  <footer id="method">Pipeline: one-hot + scale → RandomForestRegressor · 5-fold CV MAE · Diwali Sales Data.csv · Diagram magnitudes from dataset aggregates; ticket figure is a demo estimate until backend wires the pickle.</footer>
+</main>
+<script>
+document.getElementById('pform').addEventListener('submit', function(e){
+  e.preventDefault();
+  var base = 7100;
+  if (document.getElementById('g').value === 'F') base += 1800;
+  if (document.getElementById('age').value === '26-35') base += 2200;
+  if (document.getElementById('mar').value === '1') base += 1400;
+  if (/Uttar|Maha|Karna/.test(document.getElementById('st').value)) base += 900;
+  if (/IT|Health|Avia/.test(document.getElementById('oc').value)) base += 1100;
+  document.getElementById('amt').innerHTML = '₹' + base.toLocaleString('en-IN') + '<small>Predicted spend · through service</small>';
+  document.getElementById('barYou').textContent = (base/1000).toFixed(1) + 'k';
+  document.getElementById('res').classList.add('show');
+});
+document.querySelectorAll('select').forEach(function(s){
+  s.addEventListener('change', function(){ s.dataset.picked = '1'; });
+});
+</script>
+</body>
+</html>

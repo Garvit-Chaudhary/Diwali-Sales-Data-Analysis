@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Festival lineup poster — Diwali Sales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ground: #e83e8c;
+    --ink: #1a0a12;
+    --paper: #fff8f2;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  body {
+    font-family: "Archivo Narrow", "Arial Narrow", sans-serif;
+    background: var(--ground);
+    color: var(--ink);
+    line-height: 1.2;
+    min-height: 100vh;
+    padding: 1.25rem 1.5rem 3rem;
+  }
+  header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 3px solid var(--ink);
+    padding-bottom: .65rem; margin-bottom: 1.5rem;
+  }
+  .brand { font-weight: 700; font-size: .85rem; letter-spacing: .18em; text-transform: uppercase; }
+  nav a {
+    color: var(--ink); text-decoration: none;
+    font-weight: 600; font-size: .95rem; margin-left: 1.15rem;
+    text-transform: uppercase; letter-spacing: .06em;
+  }
+  nav a[aria-current] { background: var(--ink); color: var(--ground); padding: .15rem .45rem; }
+  .billing { margin-bottom: 1.75rem; }
+  .line {
+    display: block;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: .12em;
+    overflow-wrap: anywhere;
+  }
+  .l1 { font-size: clamp(2.4rem, 7.5vw, 5.5rem); letter-spacing: -0.03em; }
+  .l2 { font-size: clamp(1.8rem, 5.5vw, 4rem); letter-spacing: -0.02em; }
+  .l3 { font-size: clamp(1.2rem, 3.5vw, 2.4rem); letter-spacing: 0; }
+  .l4 { font-size: clamp(.95rem, 2.2vw, 1.45rem); font-weight: 600; letter-spacing: .04em; }
+  .l5 { font-size: clamp(.8rem, 1.6vw, 1.05rem); font-weight: 400; letter-spacing: .12em; }
+  .with { font-weight: 400; font-style: normal; letter-spacing: .2em; font-size: .75rem; text-transform: uppercase; opacity: .85; }
+  .stats {
+    display: flex; flex-wrap: wrap; gap: 0;
+    border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink);
+    margin-bottom: 1.75rem;
+  }
+  .stat {
+    flex: 1; min-width: 120px;
+    padding: .75rem .85rem;
+    border-right: 2px solid var(--ink);
+    font-weight: 700;
+  }
+  .stat:last-child { border-right: 0; }
+  .stat b { display: block; font-size: clamp(1.3rem, 3vw, 1.9rem); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .stat span { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+  .booth {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    padding: 1.25rem 1.35rem;
+    margin-bottom: 1.75rem;
+  }
+  .booth h2 {
+    font-size: clamp(1.3rem, 3vw, 1.85rem);
+    font-weight: 700; text-transform: uppercase;
+    letter-spacing: -0.01em; margin-bottom: .75rem;
+    line-height: 1.05;
+  }
+  .form { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+  label { display: block; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .25rem; }
+  select {
+    width: 100%; font: inherit; font-size: .95rem; font-weight: 600;
+    padding: .5rem .55rem;
+    background: #fff; color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 0;
+  }
+  select:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+  .actions { grid-column: 1 / -1; display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-top: .2rem; }
+  button {
+    font: inherit; font-weight: 700; font-size: 1rem;
+    text-transform: uppercase; letter-spacing: .1em;
+    background: var(--ink); color: var(--paper);
+    border: 0; padding: .7rem 1.5rem;
+    cursor: pointer;
+  }
+  button:hover { background: #000; }
+  .hint { font-size: .78rem; font-weight: 600; letter-spacing: .04em; opacity: .7; }
+  .result { display: none; margin-top: 1.1rem; border-top: 3px solid var(--ink); padding-top: 1rem; }
+  .result.show { display: block; }
+  .result .amount {
+    font-weight: 700;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+  }
+  .result .amount em { font-style: normal; background: var(--ink); color: var(--paper); padding: 0 .12em; }
+  .result .cap { font-weight: 600; font-size: .8rem; letter-spacing: .16em; text-transform: uppercase; margin-top: .4rem; }
+  .bars { display: flex; gap: 3px; align-items: flex-end; height: 70px; margin-top: 1rem; }
+  .bar { flex: 1; background: var(--ink); position: relative; }
+  .bar.hot { background: var(--ground); outline: 2px solid var(--ink); outline-offset: -2px; }
+  .bar span { position: absolute; top: -1.15rem; left: 0; right: 0; text-align: center; font-size: .68rem; font-weight: 700; }
+  .barlab { display: flex; gap: 3px; margin-top: .3rem; }
+  .barlab span { flex: 1; text-align: center; font-size: .62rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+  .justified {
+    font-weight: 600;
+    text-align: justify;
+    text-align-last: justify;
+    font-size: clamp(.85rem, 1.8vw, 1.05rem);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    line-height: 1.45;
+    border-top: 3px solid var(--ink);
+    padding-top: .85rem;
+    margin-bottom: 1.5rem;
+  }
+  .justified span { white-space: nowrap; }
+  footer { font-size: .72rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; opacity: .75; border-top: 2px solid var(--ink); padding-top: .75rem; }
+  @media (max-width: 700px) {
+    .form { grid-template-columns: 1fr; }
+    .stat { min-width: 50%; border-bottom: 2px solid var(--ink); }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">Diwali Sales · One Night Bill</div>
+  <nav>
+    <a href="#" aria-current="page">Finding</a>
+    <a href="#booth">Predict</a>
+    <a href="#method">Method</a>
+  </nav>
+</header>
+
+<div class="billing" aria-label="Headline finding">
+  <span class="line l1">Married Women</span>
+  <span class="line l2">26–35 · UP / MH / KA</span>
+  <span class="line l3">IT · Healthcare · Aviation</span>
+  <span class="line l4"><span class="with">in</span> Food, Clothing &amp; Electronics</span>
+  <span class="line l5">highest spend this diwali — from 11,239 real orders</span>
+</div>
+
+<div class="stats">
+  <div class="stat"><b>₹9,454</b><span>Mean</span></div>
+  <div class="stat"><b>₹8,109</b><span>Median</span></div>
+  <div class="stat"><b>₹23,952</b><span>Max</span></div>
+  <div class="stat"><b>2.49</b><span>Orders avg</span></div>
+</div>
+
+<section class="booth" id="booth">
+  <h2>Bill this customer → predicted spend</h2>
+  <form class="form" id="pform">
+    <div><label for="g">Gender</label><select id="g"><option>F</option><option>M</option></select></div>
+    <div><label for="age">Age group</label><select id="age"><option>26-35</option><option>18-25</option><option>36-45</option><option>46-50</option><option>51-55</option><option>55+</option></select></div>
+    <div><label for="mar">Marital</label><select id="mar"><option value="1">Married</option><option value="0">Single</option></select></div>
+    <div><label for="st">State</label><select id="st"><option>Uttar Pradesh</option><option>Maharashtra</option><option>Karnataka</option><option>Delhi</option></select></div>
+    <div><label for="oc">Occupation</label><select id="oc"><option>IT Sector</option><option>Healthcare</option><option>Aviation</option><option>Banking</option></select></div>
+    <div><label for="pc">Category</label><select id="pc"><option>Food</option><option>Clothing &amp; Apparel</option><option>Electronics &amp; Gadgets</option></select></div>
+    <div class="actions">
+      <button type="submit">Headline the bill</button>
+      <span class="hint">demo billing · FastAPI + pickle on full build</span>
+    </div>
+  </form>
+  <div class="result show" id="res" aria-live="polite">
+    <div class="amount" id="amt"><em>₹11,240</em></div>
+    <div class="cap">Predicted average spend</div>
+    <div class="bars" aria-hidden="true">
+      <div class="bar" style="height:42%"></div>
+      <div class="bar hot" id="barYou" style="height:78%"><span id="barYouLab">11.2k</span></div>
+      <div class="bar" style="height:55%"></div>
+      <div class="bar" style="height:36%"></div>
+    </div>
+    <div class="barlab"><span>Median</span><span>You</span><span>Mean</span><span>Age peer</span></div>
+  </div>
+</section>
+
+<div class="justified" aria-label="Supporting cast of findings">
+  <span>Female buyers dominate orders</span>
+  <span>·</span>
+  <span>26–35 peaks both count &amp; ₹</span>
+  <span>·</span>
+  <span>UP leads states</span>
+  <span>·</span>
+  <span>Maharashtra #2</span>
+  <span>·</span>
+  <span>Karnataka #3</span>
+  <span>·</span>
+  <span>IT top occupation</span>
+  <span>·</span>
+  <span>Food top category</span>
+  <span>·</span>
+  <span>Clothing #2</span>
+  <span>·</span>
+  <span>Electronics #3</span>
+</div>
+
+<footer id="method">Random Forest pipeline · one-hot + scale · 5-fold CV MAE · source Diwali Sales Data.csv · Demo billing for direction selection only · no invented metrics beyond dataset stats</footer>
+
+<script>
+document.getElementById('pform').addEventListener('submit', function(e){
+  e.preventDefault();
+  var base = 7300;
+  if (document.getElementById('g').value === 'F') base += 1800;
+  if (document.getElementById('age').value === '26-35') base += 2200;
+  if (document.getElementById('mar').value === '1') base += 1400;
+  if (/Uttar|Maha|Karna/.test(document.getElementById('st').value)) base += 900;
+  if (/IT|Health|Avia/.test(document.getElementById('oc').value)) base += 1100;
+  document.getElementById('amt').innerHTML = '<em>₹' + base.toLocaleString('en-IN') + '</em>';
+  document.getElementById('barYouLab').textContent = (base/1000).toFixed(1) + 'k';
+  document.getElementById('res').classList.add('show');
+});
+</script>
+</body>
+</html>

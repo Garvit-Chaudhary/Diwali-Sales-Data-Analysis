@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>dbg</title></head><body>
+<pre id="out">pending</pre>
+<iframe id="f" src="/" style="width:390px;height:844px;border:0"></iframe>
+<script>
+function measure() {
+  var d = document.getElementById('f').contentDocument;
+  var win = document.getElementById('f').contentWindow;
+  var cw = d.documentElement.clientWidth;
+  var res = { viewport: cw, scrollW: d.documentElement.scrollWidth, bodyScrollW: d.body.scrollWidth, offenders: [], probes: [] };
+  var sel = ['body','.sheet','main','#finding','.metrics','#reels','.grid-2','.grid-2 > .chart-block',
+    '#chart-age','.bar-row','#chart-heat','.heat','#model','.verdict','#booth','.form','.result','.peer-bars','header','nav','footer.site','.method'];
+  sel.forEach(function(s){
+    var el = d.querySelector(s);
+    if (!el) { res.probes.push([s,'MISSING']); return; }
+    var r = el.getBoundingClientRect();
+    res.probes.push([s, Math.round(r.left), Math.round(r.right), Math.round(r.width), el.scrollWidth, el.clientWidth]);
+  });
+  d.querySelectorAll('body *').forEach(function(el){
+    var r = el.getBoundingClientRect();
+    if (r.right > cw + 1 || r.left < -1) {
+      res.offenders.push([el.tagName + '.' + (el.className||'').toString().slice(0,40), Math.round(r.left), Math.round(r.right)]);
+    }
+  });
+  res.offenders = res.offenders.slice(0, 40);
+  document.getElementById('out').textContent = JSON.stringify(res, null, 1);
+  document.title = 'dbg-done';
+}
+var t = setInterval(function(){
+  var f = document.getElementById('f');
+  try {
+    if (f.contentDocument && f.contentDocument.readyState === 'complete' &&
+        f.contentDocument.getElementById('m-rows') && f.contentDocument.getElementById('m-rows').textContent !== '—') {
+      clearInterval(t); setTimeout(measure, 800);
+    }
+  } catch(e) { clearInterval(t); document.getElementById('out').textContent = 'ERR ' + e; }
+}, 300);
+setTimeout(function(){ if (document.title !== 'dbg-done') { try { measure(); } catch(e){ document.getElementById('out').textContent='ERR2 '+e; } } }, 8000);
+</script>
+</body></html>

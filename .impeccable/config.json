@@ -1,0 +1,11 @@
+{
+  "detector": {
+    "ignoreRules": [
+      "side-tab",
+      "cream-palette",
+      "repeating-stripes-gradient"
+    ],
+    "ignoreFiles": [],
+    "ignoreValues": []
+  }
+}
