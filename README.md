@@ -1,2 +1,2 @@
 # Diwali-Sales-Data-Analysis
-A data analysis project on Diwali sales that uncovers customer purchasing behavior and identifies high-value segments—revealing that married women aged 26–35 from Uttar Pradesh, Maharashtra, and Karnataka, working in IT, Healthcare, and Aviation, are the most likely to spend on Food, Clothing, and Electronics categories.
+A data analysis project on Diwali sales that uncovers customer purchasing behavior and predicts how much a customer is likely to spend (₹) using regression on their demographics, occupation, location, number of orders, and product category — revealing that married women aged 26–35 from Uttar Pradesh, Maharashtra, and Karnataka, working in IT, Healthcare, and Aviation, are the highest-spending segment.
